@@ -58,7 +58,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
       <Navbar
         user={user}
         onOpenAuth={() => {}}
@@ -74,7 +74,7 @@ export default function DashboardPage() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
               Seller Dashboard
             </h1>
             <p className="text-xs text-slate-500 mt-1">
