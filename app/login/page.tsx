@@ -23,21 +23,41 @@ function LoginForm() {
     setIsLoading(true);
     setError('');
 
-    const supabase = createClient();
-    const { data, error: authError } = await supabase.auth.signInWithPassword({
-      email: email.trim().toLowerCase(),
-      password,
-    });
+    try {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+      if (!supabaseUrl || supabaseUrl.includes('your-supabase-project') || supabaseUrl.includes('placeholder')) {
+        setError(
+          'Supabase is not configured yet. Please set your real NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in .env.local.'
+        );
+        setIsLoading(false);
+        return;
+      }
 
-    if (authError) {
-      setError(authError.message);
+      const supabase = createClient();
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password,
+      });
+
+      if (authError) {
+        setError(authError.message);
+        setIsLoading(false);
+        return;
+      }
+
+      const hasProfile = !!(data.user?.user_metadata?.onboarded);
+      router.push(hasProfile ? redirectTo : '/onboarding');
+      router.refresh();
+    } catch (err: any) {
+      if (err?.message?.includes('Failed to fetch') || err?.name === 'TypeError') {
+        setError(
+          'Failed to connect to Supabase. Please verify that NEXT_PUBLIC_SUPABASE_URL in your .env.local is an active, valid Supabase project URL.'
+        );
+      } else {
+        setError(err?.message || 'An unexpected error occurred during sign in.');
+      }
       setIsLoading(false);
-      return;
     }
-
-    const hasProfile = !!(data.user?.user_metadata?.onboarded);
-    router.push(hasProfile ? redirectTo : '/onboarding');
-    router.refresh();
   }
 
   return (

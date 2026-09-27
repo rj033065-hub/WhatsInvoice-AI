@@ -20,28 +20,43 @@ export default function SignupPage() {
     setError('');
     setInfo('');
 
-    const supabase = createClient();
-    const { data, error: authError } = await supabase.auth.signUp({
-      email: email.trim().toLowerCase(),
-      password,
-      // email confirmation is set in Supabase dashboard — if disabled, user is
-      // immediately confirmed and we can redirect right away.
-    });
+    try {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+      if (!supabaseUrl || supabaseUrl.includes('your-supabase-project') || supabaseUrl.includes('placeholder')) {
+        setError(
+          'Supabase is not configured yet. Please set your real NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in .env.local.'
+        );
+        setIsLoading(false);
+        return;
+      }
 
-    if (authError) {
-      setError(authError.message);
-      setIsLoading(false);
-      return;
-    }
+      const supabase = createClient();
+      const { data, error: authError } = await supabase.auth.signUp({
+        email: email.trim().toLowerCase(),
+        password,
+      });
 
-    // Supabase returns a session immediately when email confirm is disabled;
-    // otherwise data.session is null and we show the check-email message.
-    if (data.session) {
-      // New user — no business profile yet → onboarding
-      router.push('/onboarding');
-      router.refresh();
-    } else {
-      setInfo('Check your email to confirm your account, then sign in.');
+      if (authError) {
+        setError(authError.message);
+        setIsLoading(false);
+        return;
+      }
+
+      if (data.session) {
+        router.push('/onboarding');
+        router.refresh();
+      } else {
+        setInfo('Account created! Please check your email to confirm, then sign in.');
+        setIsLoading(false);
+      }
+    } catch (err: any) {
+      if (err?.message?.includes('Failed to fetch') || err?.name === 'TypeError') {
+        setError(
+          'Failed to connect to Supabase. Please verify that NEXT_PUBLIC_SUPABASE_URL in your .env.local is an active, valid Supabase project URL.'
+        );
+      } else {
+        setError(err?.message || 'An unexpected error occurred during signup.');
+      }
       setIsLoading(false);
     }
   }
