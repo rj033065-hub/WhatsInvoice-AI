@@ -6,7 +6,8 @@ import { Navbar } from '@/components/Navbar';
 import { InvoiceList } from '@/components/InvoiceList';
 import { Invoice } from '@/lib/types/invoice';
 import { createClient } from '@/lib/supabase/client';
-import { Plus, Sparkles, FileText, History, TrendingUp, DollarSign } from 'lucide-react';
+import { FileText, Plus } from 'lucide-react';
+import { SonarGrid } from '@/components/ui/sonar-grid';
 
 export default function DashboardPage() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -72,26 +73,51 @@ export default function DashboardPage() {
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-              Seller Dashboard
+        <SonarGrid
+          spacing={28}
+          dotRadius={1.2}
+          baseOpacity={0.16}
+          pingEvery={3.5}
+          speed={220}
+          ringWidth={70}
+          amplitude={1.4}
+          interactive
+          maxRings={3}
+          seedPing
+          pingArea={[0.15, 0.18, 0.85, 0.82]}
+          className="min-h-[320px] rounded-xl border border-blue-100 bg-white shadow-sm sm:min-h-[340px]"
+        >
+          <div className="flex min-h-[320px] flex-col items-center justify-center px-5 py-10 text-center sm:min-h-[340px] sm:px-10">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-700">
+              WhatsInvoice AI Workspace
+            </p>
+            <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+              AI Invoice Workspace
             </h1>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600 sm:text-base">
+              Turn customer messages into accurate, professional invoices with AI-powered extraction.
+            </p>
+            <div className="mt-7 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
+              <Link
+                href="/invoice/new"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+              >
+                <Plus className="h-4 w-4" aria-hidden="true" />
+                Create Invoice
+              </Link>
+              <Link
+                href="/invoices"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+              >
+                <FileText className="h-4 w-4" aria-hidden="true" />
+                View Invoices
+              </Link>
+            </div>
+            <p className="mt-6 text-[11px] text-slate-500">
               Protected by Supabase Row Level Security (RLS) &bull; Decimal.js Exact Calculations
             </p>
           </div>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/invoice/new"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-md shadow-emerald-600/30 transition-all active:scale-95"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Create / Extract Invoice</span>
-            </Link>
-          </div>
-        </div>
+        </SonarGrid>
 
         <InvoiceList
           invoices={invoices}
