@@ -8,6 +8,7 @@ import { InvoicePrintView } from '@/components/InvoicePrintView';
 import { Invoice } from '@/lib/types/invoice';
 import { ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
+import { Toast } from '@/components/motion/Toast';
 
 export default function InvoiceDetailPage({
   params,
@@ -159,6 +160,12 @@ export default function InvoiceDetailPage({
         hasCustomApiKey={false}
       />
 
+      {saveMessage && (
+        <Toast tone={saveMessage.type === 'success' ? 'success' : 'error'}>
+          {saveMessage.text}
+        </Toast>
+      )}
+
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex items-center justify-between print:hidden">
           <Link
@@ -169,17 +176,6 @@ export default function InvoiceDetailPage({
             <span>Back to Invoices History</span>
           </Link>
 
-          {saveMessage && (
-            <div
-              className={`text-xs font-semibold px-3 py-1 rounded border ${
-                saveMessage.type === 'success'
-                  ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                  : 'bg-rose-50 text-rose-800 border-rose-200'
-              }`}
-            >
-              {saveMessage.text}
-            </div>
-          )}
         </div>
 
         <InvoiceEditor

@@ -169,7 +169,7 @@ export const InvoiceEditor: React.FC<InvoiceEditorProps> = ({
   const currency = invoice.currency || '₹';
 
   return (
-    <div className="w-full bg-white border border-slate-200 rounded-lg p-6 space-y-6 print:hidden shadow-xs">
+    <div className="motion-card w-full bg-white border border-slate-200 rounded-2xl p-6 space-y-6 print:hidden shadow-xs">
       {/* ── Header & Action Buttons ──────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
         <div>
@@ -291,7 +291,7 @@ export const InvoiceEditor: React.FC<InvoiceEditorProps> = ({
       />
 
       {/* ── Customer Details (Full Editable Fields) ───────────────────────── */}
-      <div className="space-y-3 bg-slate-50/70 p-4 rounded-md border border-slate-200">
+      <div className="space-y-3 bg-surface-2 p-4 rounded-xl border border-slate-200">
         <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
           Customer Information
         </h3>
@@ -466,7 +466,7 @@ export const InvoiceEditor: React.FC<InvoiceEditorProps> = ({
           />
         </div>
 
-        <div className="bg-slate-50 border border-slate-200 rounded-md p-4 space-y-2.5 text-xs text-slate-700">
+        <div className="bg-surface-2 border border-slate-200 rounded-xl p-4 space-y-2.5 text-xs text-slate-700">
           <div className="flex justify-between">
             <span className="text-slate-600 font-medium">Subtotal:</span>
             <span className="font-mono font-semibold text-slate-900">

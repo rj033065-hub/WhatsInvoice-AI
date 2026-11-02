@@ -31,7 +31,7 @@ export const ExtractionInput: React.FC<ExtractionInputProps> = ({
   };
 
   return (
-    <div className="w-full bg-white border border-slate-200 rounded-lg p-5 space-y-4">
+    <div className="motion-card w-full bg-white border border-slate-200 rounded-2xl p-5 space-y-4">
       <div className="flex items-center justify-between border-b border-slate-100 pb-3">
         <div className="flex items-center gap-2">
           <MessageSquare className="w-4 h-4 text-blue-600" />

@@ -1,24 +1,314 @@
+@import "lenis/dist/lenis.css";
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  color-scheme: dark;
+  --background: #0b0f14;
+  --surface: #121821;
+  --surface-2: #19212c;
+  --border: #243040;
+  --text: #e6edf3;
+  --text-muted: #8b98a9;
+  --accent: #25d366;
+  --accent-hover: #3be07a;
+  --accent-ink: #04210f;
+  --success: #34d399;
+  --warning: #f5a524;
+  --danger: #f87171;
+  --foreground: var(--text);
+
+  /* shadcn UI & Component Theme Variables */
+  --primary: #25d366;
+  --primary-foreground: #04210f;
+  --secondary: #19212c;
+  --secondary-foreground: #e6edf3;
+  --muted: #19212c;
+  --muted-foreground: #8b98a9;
+  --card: #121821;
+  --card-foreground: #e6edf3;
+  --destructive: #f87171;
+  --destructive-foreground: #ffffff;
+  --chart-1: #25d366;
+  --chart-2: #34d399;
+  --chart-3: #38bdf8;
+  --chart-4: #818cf8;
+  --chart-5: #f472b6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-ink: var(--accent-ink);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-slate-50: var(--background);
+  --color-slate-100: var(--surface-2);
+  --color-slate-200: var(--border);
+  --color-slate-300: var(--border);
+  --color-slate-400: var(--text-muted);
+  --color-slate-500: var(--text-muted);
+  --color-slate-600: var(--text-muted);
+  --color-slate-700: var(--text);
+  --color-slate-800: var(--text);
+  --color-slate-900: var(--text);
+
+  --color-blue-50: color-mix(in srgb, var(--accent) 12%, transparent);
+  --color-blue-100: color-mix(in srgb, var(--accent) 12%, transparent);
+  --color-blue-200: color-mix(in srgb, var(--accent) 28%, var(--border));
+  --color-blue-300: color-mix(in srgb, var(--accent) 38%, var(--border));
+  --color-blue-600: var(--accent);
+  --color-blue-700: var(--accent-hover);
+  --color-blue-800: var(--accent-hover);
+
+  --color-emerald-50: color-mix(in srgb, var(--success) 12%, transparent);
+  --color-emerald-100: color-mix(in srgb, var(--success) 12%, transparent);
+  --color-emerald-200: color-mix(in srgb, var(--success) 28%, var(--border));
+  --color-emerald-600: var(--success);
+  --color-emerald-700: var(--success);
+  --color-emerald-800: var(--success);
+
+  --color-amber-50: color-mix(in srgb, var(--warning) 12%, transparent);
+  --color-amber-100: color-mix(in srgb, var(--warning) 12%, transparent);
+  --color-amber-200: color-mix(in srgb, var(--warning) 28%, var(--border));
+  --color-amber-500: var(--warning);
+  --color-amber-600: var(--warning);
+  --color-amber-700: var(--warning);
+  --color-amber-800: var(--warning);
+  --color-amber-900: var(--warning);
+
+  --color-rose-50: color-mix(in srgb, var(--danger) 12%, transparent);
+  --color-rose-100: color-mix(in srgb, var(--danger) 12%, transparent);
+  --color-rose-200: color-mix(in srgb, var(--danger) 28%, var(--border));
+  --color-rose-600: var(--danger);
+  --color-rose-700: var(--danger);
+  --color-rose-800: var(--danger);
+  --color-rose-900: var(--danger);
+
+  --color-red-50: color-mix(in srgb, var(--danger) 12%, transparent);
+  --color-red-200: color-mix(in srgb, var(--danger) 28%, var(--border));
+  --color-red-700: var(--danger);
 }
 
 body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--background);
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+  color: var(--text);
+}
+
+.bg-white {
+  background-color: var(--surface);
+}
+
+.bg-white:is(button, a) {
+  background-color: transparent;
+}
+
+.bg-blue-600,
+.bg-emerald-600,
+.bg-amber-500 {
+  background-color: var(--accent);
+}
+
+.bg-rose-600 {
+  background-color: var(--danger);
+}
+
+[class~="hover:bg-blue-700"]:hover,
+[class~="hover:bg-emerald-700"]:hover,
+[class~="hover:bg-amber-600"]:hover {
+  background-color: var(--accent-hover);
+}
+
+[class~="hover:bg-rose-700"]:hover {
+  background-color: color-mix(in srgb, var(--danger) 82%, black);
+}
+
+.bg-blue-600.text-white,
+.bg-emerald-600.text-white,
+.bg-amber-500.text-white,
+.bg-rose-600.text-white {
+  color: var(--accent-ink);
+}
+
+[class~="bg-white/90"] {
+  background-color: color-mix(in srgb, var(--surface) 90%, transparent);
+}
+
+div.bg-white.border,
+section.bg-white.border {
+  border-color: var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 12px 36px rgb(0 0 0 / 10%);
+}
+
+div.bg-white.border.shadow-2xl {
+  box-shadow: 0 24px 64px rgb(0 0 0 / 42%);
+}
+
+input,
+select,
+textarea {
+  border-color: var(--border);
+  background-color: var(--surface-2) !important;
+  color: var(--text);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent) !important;
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent) !important;
+  outline-offset: 1px !important;
+}
+
+option {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+tr:hover {
+  background-color: var(--surface-2);
+}
+
+[class~="hover:bg-slate-50"]:hover,
+[class~="hover:bg-slate-100"]:hover {
+  background-color: var(--surface-2);
+}
+
+button:not(:disabled),
+a[href] {
+  transition: transform 0.3s ease-out;
+}
+
+button:not(:disabled):active,
+a[href]:active {
+  transform: scale(0.985);
+}
+
+.motion-card {
+  transition:
+    transform 0.35s ease-out,
+    border-color 0.35s ease-out,
+    box-shadow 0.35s ease-out;
+}
+
+.motion-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent),
+    0 8px 24px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--surface-2) 20%, color-mix(in srgb, var(--text) 9%, var(--surface-2)) 48%, var(--surface-2) 76%);
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 0.55s ease-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    background-position-x: -220%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .skeleton-shimmer {
+    animation: none;
+    background: var(--surface-2);
+  }
+
+  .motion-card,
+  button:not(:disabled),
+  a[href] {
+    transition: none;
+  }
+
+  button:not(:disabled):active,
+  a[href]:active,
+  .motion-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 /* Print CSS setup for Browser Print & Save as PDF */
 @media print {
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --accent: #15803d;
+    --accent-hover: #166534;
+    --accent-ink: #ffffff;
+    --success: #047857;
+    --warning: #b45309;
+    --danger: #b91c1c;
+  }
+
   body {
     background: white !important;
     color: black !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+  .bg-white {
+    background-color: white !important;
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: white !important;
+    color: black !important;
+    outline: none !important;
   }
 
   .print\:hidden {

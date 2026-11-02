@@ -105,7 +105,7 @@ export const InvoicePrintView: React.FC<InvoicePrintViewProps> = ({
 
         {/* Invoice Title & Number */}
         <div className="text-right">
-          <span className="inline-block px-2.5 py-1 text-xs font-black uppercase tracking-wider bg-slate-900 text-white rounded-xs mb-2">
+          <span className="inline-block px-2.5 py-1 text-xs font-black uppercase tracking-wider bg-surface-2 text-text rounded-xs mb-2">
             TAX INVOICE
           </span>
           <p className="text-base font-bold font-mono text-slate-900">
